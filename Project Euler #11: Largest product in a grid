@@ -1,0 +1,63 @@
+#!/bin/python3
+"What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20*20 grid?"
+import sys
+
+
+
+
+
+grid=[]
+for _ in range(20):
+    grid.append(list(map(int, input().strip().split(' '))))
+
+def retur_max(grid):
+    lis2=[]
+    for i in grid:
+        dum_lis=[]
+        for j in range(len(i)-3):
+            dum_lis.append(i[j]*i[j+1]*i[j+2] *i[j+3] )
+        lis2.append(dum_lis)
+    lis3=[]
+    for i in lis2:
+        lis3.append(max(i))
+    t_row=max(lis3)
+    return t_row
+#print(t_row)
+#------------ column
+
+#creating transpose 
+def transpose(grid):
+    i=len(grid)
+    j=len(grid[0])
+    grid_1=[]
+    for p in range(j):
+        new_row=[]
+        for t in range(i):
+            new_row.append(grid[t][p])
+        grid_1.append(new_row)
+    return grid_1  #after retrun transpose findin the max element after multiplication
+#--------------------------------
+
+def multiply_all_diagonal_elements(matrix):
+    n = len(matrix)
+    result_list = []
+
+    for k in range(n - 3):
+        for i in range(n - k - 3):
+            result = 1
+            for j in range(4):
+                result *= matrix[i + j][i + j + k]
+            result_list.append(result)
+
+    return result_list
+#-------------
+lis4=[]
+t_row=retur_max(grid)
+column_grid=transpose(grid)
+t_column=retur_max(column_grid)
+lis4.append(t_row)
+lis4.append(t_column)
+#print(grid)
+result_list = multiply_all_diagonal_elements(grid)
+lis4.append(max(result_list))
+print(max(lis4))
