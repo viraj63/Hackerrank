@@ -1,0 +1,45 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+n=int(input())
+lis=[]
+for _ in range(n):
+    lis.append(int(input()))
+lis2=[]
+
+def coltrz_num(num):
+    seq=[num]
+    while num!=1:
+        if num %2==0:
+            num//=2
+        else:
+            num=3*num + 1
+        seq.append(num)
+    return seq
+
+for i in lis:
+    dum_lis=[]
+    for j in range(1,i+1):
+        t=coltrz_num(j)
+        dum_lis.append(t)
+    lis2.append(dum_lis)
+
+lis3=[]
+for i in lis2:
+    res_dic={}
+    for j in i:
+        key=j[0]
+        value=len(j[1:])
+        res_dic[key]=value
+    lis3.append(res_dic)
+
+lis4=[]
+for i in lis3:
+    max_value = max(i.values())
+    key_max = [key for key, value in i.items() if value == max_value][-1]
+    lis4.append(key_max)
+
+for i in lis4:
+    print(i)
+
+
+
+#this code is useful if you have no constraints of runtime error
